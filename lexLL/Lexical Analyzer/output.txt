@@ -1,0 +1,116 @@
+ASSIGNMENT : ASSIGNMENT --'id'--> 'id' 'assign' EXPRESSION ';'    
+DECLARATION : DECLARATION --'float'--> PRIMITIVE_TYPE 'id' ';'    DECLARATION --'int'--> PRIMITIVE_TYPE 'id' ';'    
+EXPRESSION : EXPRESSION --'('--> SIMPLE_EXPRESSION EXPRESSION'    EXPRESSION --'addop'--> SIMPLE_EXPRESSION EXPRESSION'    EXPRESSION --'id'--> SIMPLE_EXPRESSION EXPRESSION'    EXPRESSION --'num'--> SIMPLE_EXPRESSION EXPRESSION'    
+EXPRESSION' : EXPRESSION' --')'--> \L    EXPRESSION' --';'--> \L    EXPRESSION' --'relop'--> 'relop' SIMPLE_EXPRESSION    
+FACTOR : FACTOR --'('--> '(' EXPRESSION ')'    FACTOR --'id'--> 'id'    FACTOR --'num'--> 'num'    
+IF : IF --'if'--> 'if' '(' EXPRESSION ')' '{' STATEMENT '}' 'else' '{' STATEMENT '}'    
+METHOD_BODY : METHOD_BODY --'float'--> STATEMENT_LIST    METHOD_BODY --'id'--> STATEMENT_LIST    METHOD_BODY --'if'--> STATEMENT_LIST    METHOD_BODY --'int'--> STATEMENT_LIST    METHOD_BODY --'while'--> STATEMENT_LIST    
+PRIMITIVE_TYPE : PRIMITIVE_TYPE --'float'--> 'float'    PRIMITIVE_TYPE --'int'--> 'int'    
+SIGN : SIGN --'addop'--> 'addop'    
+SIMPLE_EXPRESSION : SIMPLE_EXPRESSION --'('--> TERM SIMPLE_EXPRESSION'    SIMPLE_EXPRESSION --'addop'--> 'addop' TERM SIMPLE_EXPRESSION'    SIMPLE_EXPRESSION --'id'--> TERM SIMPLE_EXPRESSION'    SIMPLE_EXPRESSION --'num'--> TERM SIMPLE_EXPRESSION'    
+SIMPLE_EXPRESSION' : SIMPLE_EXPRESSION' --')'--> \L    SIMPLE_EXPRESSION' --';'--> \L    SIMPLE_EXPRESSION' --'addop'--> 'addop' TERM SIMPLE_EXPRESSION'    SIMPLE_EXPRESSION' --'relop'--> \L    
+STATEMENT : STATEMENT --'float'--> 'float' 'id' ';'    STATEMENT --'id'--> 'id' 'assign' EXPRESSION ';'    STATEMENT --'if'--> 'if' '(' EXPRESSION ')' '{' STATEMENT '}' 'else' '{' STATEMENT '}'    STATEMENT --'int'--> 'int' 'id' ';'    STATEMENT --'while'--> WHILE    
+STATEMENT_LIST : STATEMENT_LIST --'float'--> 'float' 'id' ';' STATEMENT_LIST'    STATEMENT_LIST --'id'--> 'id' 'assign' EXPRESSION ';' STATEMENT_LIST'    STATEMENT_LIST --'if'--> 'if' '(' EXPRESSION ')' '{' STATEMENT '}' 'else' '{' STATEMENT '}' STATEMENT_LIST'    STATEMENT_LIST --'int'--> 'int' 'id' ';' STATEMENT_LIST'    STATEMENT_LIST --'while'--> WHILE STATEMENT_LIST'    
+STATEMENT_LIST' : STATEMENT_LIST' --$--> \L    STATEMENT_LIST' --'float'--> 'float' 'id' ';' STATEMENT_LIST'    STATEMENT_LIST' --'id'--> 'id' 'assign' EXPRESSION ';' STATEMENT_LIST'    STATEMENT_LIST' --'if'--> 'if' '(' EXPRESSION ')' '{' STATEMENT '}' 'else' '{' STATEMENT '}' STATEMENT_LIST'    STATEMENT_LIST' --'int'--> 'int' 'id' ';' STATEMENT_LIST'    STATEMENT_LIST' --'while'--> WHILE STATEMENT_LIST'    
+TERM : TERM --'('--> '(' EXPRESSION ')' TERM'    TERM --'id'--> 'id' TERM'    TERM --'num'--> 'num' TERM'    
+TERM' : TERM' --')'--> \L    TERM' --';'--> \L    TERM' --'addop'--> \L    TERM' --'mulop'--> 'mulop' FACTOR TERM'    TERM' --'relop'--> \L    
+WHILE : WHILE --'while'--> 'while' '(' EXPRESSION ')' '{' STATEMENT '}'    
+
+===========================================================
+METHOD_BODY-> STATEMENT_LIST
+STATEMENT_LIST-> 'int' 'id' ';' STATEMENT_LIST'
+Match is found in token 'int'
+Match is found in token 'id'
+Match is found in token ';'
+STATEMENT_LIST'-> WHILE STATEMENT_LIST'
+WHILE-> 'while' '(' EXPRESSION ')' '{' STATEMENT '}'
+Match is found in token 'while'
+Match is found in token '('
+EXPRESSION-> SIMPLE_EXPRESSION EXPRESSION'
+SIMPLE_EXPRESSION-> TERM SIMPLE_EXPRESSION'
+TERM-> 'id' TERM'
+Match is found in token 'id'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> EPS
+EXPRESSION'-> 'relop' SIMPLE_EXPRESSION
+Match is found in token 'relop'
+SIMPLE_EXPRESSION-> TERM SIMPLE_EXPRESSION'
+TERM-> 'num' TERM'
+Match is found in token 'num'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> EPS
+Match is found in token ')'
+Match is found in token '{'
+STATEMENT-> 'id' 'assign' EXPRESSION ';'
+Match is found in token 'id'
+Match is found in token 'assign'
+EXPRESSION-> SIMPLE_EXPRESSION EXPRESSION'
+SIMPLE_EXPRESSION-> TERM SIMPLE_EXPRESSION'
+TERM-> 'id' TERM'
+Match is found in token 'id'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> 'addop' TERM SIMPLE_EXPRESSION'
+Match is found in token 'addop'
+TERM-> 'num' TERM'
+Match is found in token 'num'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> EPS
+EXPRESSION'-> EPS
+Match is found in token ';'
+Match is found in token '}'
+STATEMENT_LIST'-> 'if' '(' EXPRESSION ')' '{' STATEMENT '}' 'else' '{' STATEMENT '}' STATEMENT_LIST'
+Match is found in token 'if'
+Match is found in token '('
+EXPRESSION-> SIMPLE_EXPRESSION EXPRESSION'
+SIMPLE_EXPRESSION-> TERM SIMPLE_EXPRESSION'
+TERM-> 'id' TERM'
+Match is found in token 'id'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> EPS
+EXPRESSION'-> 'relop' SIMPLE_EXPRESSION
+Match is found in token 'relop'
+SIMPLE_EXPRESSION-> TERM SIMPLE_EXPRESSION'
+TERM-> 'num' TERM'
+Match is found in token 'num'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> EPS
+Match is found in token ')'
+Match is found in token '{'
+STATEMENT-> 'id' 'assign' EXPRESSION ';'
+Match is found in token 'id'
+Match is found in token 'assign'
+EXPRESSION-> SIMPLE_EXPRESSION EXPRESSION'
+SIMPLE_EXPRESSION-> TERM SIMPLE_EXPRESSION'
+TERM-> 'id' TERM'
+Match is found in token 'id'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> 'addop' TERM SIMPLE_EXPRESSION'
+Match is found in token 'addop'
+TERM-> 'num' TERM'
+Match is found in token 'num'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> EPS
+EXPRESSION'-> EPS
+Match is found in token ';'
+Match is found in token '}'
+Match is found in token 'else'
+Match is found in token '{'
+STATEMENT-> 'id' 'assign' EXPRESSION ';'
+Match is found in token 'id'
+Match is found in token 'assign'
+EXPRESSION-> SIMPLE_EXPRESSION EXPRESSION'
+SIMPLE_EXPRESSION-> TERM SIMPLE_EXPRESSION'
+TERM-> 'id' TERM'
+Match is found in token 'id'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> 'addop' TERM SIMPLE_EXPRESSION'
+Match is found in token 'addop'
+TERM-> 'id' TERM'
+Match is found in token 'id'
+TERM'-> EPS
+SIMPLE_EXPRESSION'-> EPS
+EXPRESSION'-> EPS
+Match is found in token ';'
+Match is found in token '}'
+STATEMENT_LIST'-> EPS
+
